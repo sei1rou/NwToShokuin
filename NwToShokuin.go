@@ -1322,6 +1322,8 @@ func syokenumu(s string) string {
 		s = "1"
 	case "Ｇ":
 		s = "1"
+	case "Ｈ":
+		s = "1"
 	default:
 		log.Print("判定有無変換エラー\r\n")
 		s = "err"
