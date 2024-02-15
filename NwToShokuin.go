@@ -1391,7 +1391,8 @@ func rank(v string) int {
 		r = 4
 	default:
 		r = 0
-		log.Print("判定ランクエラー\r\n")
+		//log.Print("判定ランクエラー\r\n")
+		log.Printf("判定ランクエラーa%sa\r\n",v)
 	}
 	return r
 }
