@@ -59,6 +59,9 @@ func main() {
 	// データの変換 前立腺がん
 	prostateConversion(filePath, records)
 
+	// データの変換 マンモグラフィー
+	mmgConversion(filePath, records)
+
 	log.Print("Finish !\r\n")
 
 }
@@ -512,13 +515,13 @@ func dataConversion(filename string, inRecs [][]string) {
 			cRec[63] = rankS(sogoHantei)
 
 			// 66.医師名
-			cRec[66] = inRecs[J][98]
+			cRec[66] = inRecs[J][100]
 
 			// 67.既往歴
 			// 68.具体的な既往歴
 			kiou := ""
 			for k := 0; k < 10; k++ {
-				kp := 99 + (k * 3)
+				kp := 101 + (k * 3)
 				kiouB := kiouSet(inRecs[J][kp])
 				kiouN := inRecs[J][kp+1]
 				kiouT := inRecs[J][kp+2]
@@ -552,7 +555,7 @@ func dataConversion(filename string, inRecs [][]string) {
 			// 70.自覚症状所見
 			jikaku := ""
 			for k := 0; k < 5; k++ {
-				kp := 129 + k
+				kp := 131 + k
 				jikakuS := inRecs[J][kp]
 
 				if jikakuS != "" {
@@ -581,7 +584,7 @@ func dataConversion(filename string, inRecs [][]string) {
 			// 72.他覚症状所見
 			takaku := ""
 			for k := 0; k < 3; k++ {
-				kp := 134 + k
+				kp := 136 + k
 				takakuS := inRecs[J][kp]
 
 				if takakuS != "" {
@@ -610,70 +613,70 @@ func dataConversion(filename string, inRecs [][]string) {
 			cRec[73] = ""
 
 			// 74.服薬・血圧
-			cRec[74] = yesNo(inRecs[J][137])
+			cRec[74] = yesNo(inRecs[J][139])
 
 			// 75.服薬・血糖
-			cRec[75] = yesNo(inRecs[J][138])
+			cRec[75] = yesNo(inRecs[J][140])
 
 			// 76.服薬・コレステロール
-			cRec[76] = yesNo(inRecs[J][139])
+			cRec[76] = yesNo(inRecs[J][141])
 
 			// 77.脳卒中
-			cRec[77] = yesNo(inRecs[J][140])
+			cRec[77] = yesNo(inRecs[J][142])
 
 			// 78.心臓病
-			cRec[78] = yesNo(inRecs[J][141])
+			cRec[78] = yesNo(inRecs[J][143])
 
 			// 79.慢性腎臓病
-			cRec[79] = yesNo(inRecs[J][142])
+			cRec[79] = yesNo(inRecs[J][144])
 
 			// 80.貧血
-			cRec[80] = yesNo(inRecs[J][143])
+			cRec[80] = yesNo(inRecs[J][145])
 
 			// 81.たばこ
-			cRec[81] = yesNo(inRecs[J][144])
+			cRec[81] = yesNo(inRecs[J][146])
 
 			// 82.体重１０㌔増
-			cRec[82] = yesNo(inRecs[J][145])
+			cRec[82] = yesNo(inRecs[J][147])
 
 			// 83.汗かく運動
-			cRec[83] = yesNo(inRecs[J][146])
+			cRec[83] = yesNo(inRecs[J][148])
 
 			// 84.歩行１時間以上
-			cRec[84] = yesNo(inRecs[J][147])
+			cRec[84] = yesNo(inRecs[J][149])
 
 			// 85.歩く速度
-			cRec[85] = yesNo(inRecs[J][148])
+			cRec[85] = yesNo(inRecs[J][150])
 
 			// 86.食事噛む状態
-			cRec[86] = eat2(inRecs[J][149])
+			cRec[86] = eat2(inRecs[J][151])
 
 			// 87.食べる速度
-			cRec[87] = eat(inRecs[J][150])
+			cRec[87] = eat(inRecs[J][152])
 
 			// 88.就寝前食事
-			cRec[88] = yesNo(inRecs[J][151])
+			cRec[88] = yesNo(inRecs[J][153])
 
 			// 89.間食
-			cRec[89] = drink(inRecs[J][152])
+			cRec[89] = drink(inRecs[J][154])
 
 			// 90.朝食抜き
-			cRec[90] = yesNo(inRecs[J][153])
+			cRec[90] = yesNo(inRecs[J][155])
 
 			// 91.お酒・頻度
-			cRec[91] = sake(inRecs[J][154])
+			cRec[91] = sake(inRecs[J][156])
 
 			// 92.お酒・量
-			cRec[92] = sakeryo(inRecs[J][155])
+			cRec[92] = sakeryo(inRecs[J][157])
 
 			// 93.睡眠
-			cRec[93] = yesNo(inRecs[J][156])
+			cRec[93] = yesNo(inRecs[J][158])
 
 			// 94.改善の意思
-			cRec[94] = seikatsu(inRecs[J][157])
+			cRec[94] = seikatsu(inRecs[J][159])
 
 			// 95.指導受診意思
-			cRec[95] = yesNo(inRecs[J][158])
+			cRec[95] = yesNo(inRecs[J][160])
 
 			//writer.Write(cRec)
 			row = sheet.AddRow()
@@ -774,7 +777,7 @@ func gastricConversion(filename string, inRecs [][]string) {
 				if inRecs[J][78] != "" && inRecs[J][78] != "Ａ" && inRecs[J][78] != "Ｂ" {
 					// 胃部X線の場合
 					for k := 0; k < 3; k++ {
-						kp := 159 + k
+						kp := 161 + k
 						syokenS := inRecs[J][kp]
 
 						if syokenS != "" {
@@ -790,7 +793,7 @@ func gastricConversion(filename string, inRecs [][]string) {
 					// 胃カメラの場合
 					syoken := ""
 					for k := 0; k < 3; k++ {
-						kp := 162 + k
+						kp := 164 + k
 						syokenS := inRecs[J][kp]
 
 						if syokenS != "" {
@@ -1007,7 +1010,7 @@ func breastConversion(filename string, inRecs [][]string) {
 				syoken := ""
 				if inRecs[J][94] != "" && inRecs[J][94] != "Ａ" && inRecs[J][94] != "Ｂ" {
 					for k := 0; k < 3; k++ {
-						kp := 169 + k
+						kp := 171 + k
 						syokenS := inRecs[J][kp]
 
 						if syokenS != "" {
@@ -1087,7 +1090,7 @@ func prostateConversion(filename string, inRecs [][]string) {
 
 		//　保険証番号が空欄は、データ出力対象外
 		if inRecs[J][6] != "" {
-			if inRecs[J][173] != "" {
+			if inRecs[J][175] != "" {
 				// 0.支払先CD
 				cRec[0] = "415201"
 
@@ -1117,14 +1120,131 @@ func prostateConversion(filename string, inRecs [][]string) {
 				cRec[7] = WaToSeireki(inRecs[J][9])
 
 				// 8.結果
-				cRec[8] = kekka(inRecs[J][173])
+				cRec[8] = kekka(inRecs[J][175])
 
 				// 9.所見
 
-				cRec[9] = "PSA " + inRecs[J][172]
+				cRec[9] = "PSA " + inRecs[J][174]
 
 				// 10.検査区分
 				cRec[10] = ""
+
+				//writer.Write(cRec)
+				row = sheet.AddRow()
+				for _, cell = range cRec {
+					// sheet.Cell(r, c).Value = cell
+					vcell = row.AddCell()
+					vcell.Value = cell
+				}
+			}
+		}
+	}
+
+	//writer.Flush()
+	err = excelFile.Save(excelName)
+	failOnError(err)
+}
+
+func mmgConversion(filename string, inRecs [][]string) {
+	var vcell *xlsx.Cell
+	var cell string
+
+	recLen := 11 //出力する項目数
+	cRec := make([]string, recLen)
+	var I int
+
+	day := time.Now()
+
+	excelName, _ := filepath.Split(filename)
+	excelName = excelName + "松英会職員マンモ検診データ" + day.Format("20060102") + ".xlsx"
+	excelFile := xlsx.NewFile()
+	xlsx.SetDefaultFont(11, "ＭＳ Ｐゴシック")
+	sheet, err := excelFile.AddSheet("データ")
+	failOnError(err)
+
+	//タイトル行
+	cRec[0] = "支払先CD"
+	cRec[1] = "受診日"
+	cRec[2] = "事業所記号"
+	cRec[3] = "証番号"
+	cRec[4] = "資格区分"
+	cRec[5] = "カナ氏名"
+	cRec[6] = "性別"
+	cRec[7] = "生年月日"
+	cRec[8] = "結果"
+	cRec[9] = "所見"
+	cRec[10] = "検査区分"
+	//writer.Write(cRec)
+	row := sheet.AddRow()
+	for _, cell = range cRec {
+		vcell = row.AddCell()
+		vcell.Value = cell
+	}
+
+	// データ行
+	inRecsMax := len(inRecs)
+	for J := 1; J < inRecsMax; J++ {
+		for I, _ = range cRec {
+			cRec[I] = ""
+		}
+
+		//　保険証番号が空欄は、データ出力対象外
+		if inRecs[J][6] != "" {
+			if inRecs[J][96] != "" {
+				// 0.支払先CD
+				cRec[0] = "415201"
+
+				// 1.受診日
+				cRec[1] = strings.Replace((inRecs[J][4]), "-", "/", -1)
+
+				// 2.事業所記号
+				cRec[2] = inRecs[J][5]
+
+				// 3.証番号
+				cRec[3] = inRecs[J][6]
+
+				// 4.資格区分
+				if kazokuCheck(inRecs[J][3]) {
+					cRec[4] = "1" // 家族
+				} else {
+					cRec[4] = "0" // 本人
+				}
+
+				// 5.カナ氏名
+				cRec[5] = string(norm.NFKC.Bytes([]byte(inRecs[J][7])))
+
+				// 6.性別
+				cRec[6] = sei(inRecs[J][8])
+
+				// 7.生年月日
+				cRec[7] = WaToSeireki(inRecs[J][9])
+
+				// 8.結果
+				cRec[8] = kekka(inRecs[J][96])
+
+				// 9.所見
+
+				syoken := ""
+				if inRecs[J][96] != "" && inRecs[J][96] != "Ａ" && inRecs[J][96] != "Ｂ" {
+					for k := 0; k < 3; k++ {
+						kp := 176 + k
+						syokenS := inRecs[J][kp]
+
+						if syokenS != "" {
+							if syoken == "" {
+								syoken = syokenS
+							} else {
+								syoken = syoken + " " + syokenS
+							}
+
+						}
+					}
+				}
+
+				cRec[9] = syoken
+
+				// 10.検査区分
+				cRec[10] = "マンモ"
 
 				//writer.Write(cRec)
 				row = sheet.AddRow()
